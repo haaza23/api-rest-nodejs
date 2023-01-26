@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+
+  app:
+    container_name: app
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    entrypoint:
+      - npm
+      - start
+    ports:
+      - "8080:8080"
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    # Postgres server config
+    environment:
+      - POSTGRES_USER=roots
+      - POSTGRES_PASSWORD=root
+    # Fetch data from database-seed.sql for initial setup
+    volumes:
+      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+
+  pgadmin-compose:
+    container_name: pgadmin4_container_users
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
