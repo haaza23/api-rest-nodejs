@@ -24,7 +24,7 @@ services:
       - "5432:5432"
     # Postgres server config
     environment:
-      - POSTGRES_USER=roots
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     # Fetch data from database-seed.sql for initial setup
     volumes:

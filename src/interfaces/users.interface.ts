@@ -1,4 +1,4 @@
-export interface UserSignUpInterface {
+export interface IUserSignup {
     username: string;
 
     password: string;
@@ -10,14 +10,14 @@ export interface UserSignUpInterface {
     lastName: string;
 }
 
-export interface UserLoginInterface {
+export interface IUserLogin {
     username: string;
 
     password: string;
 }
 
 export interface UserInterface {
-    user: UserSignUpInterface;
+    user: IUserSignup;
 
     refreshToken: string;
 }
