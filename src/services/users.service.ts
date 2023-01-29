@@ -33,8 +33,11 @@ export const createUser = async (user: IUserSignup) => {
 
 export const updateUser = async (userId: number, user: IUserSignup) => {
     try {
-        const updatedUser = await User.update({...user, first_name: user.firstName, last_name: user.lastName }, { where: { id: userId } });
+        const updatedUser = await User.update(
+            {...user, first_name: user.firstName, last_name: user.lastName }, 
+            { where: { id: userId }, returning: true });
         const updatedUserJSON = JSON.stringify(updatedUser, null, 2);
+        // returns affected rows and updated user
         return JSON.parse(updatedUserJSON);
     } catch (error: any) {
         throw new Error(error);

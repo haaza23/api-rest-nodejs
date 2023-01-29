@@ -15,17 +15,17 @@ export const getById = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
     const response = await createUser(req.body)
-    return sendResponse(res, 200, response)
+    return sendResponse(res, 200, { data: response })
 }
 
 export const update = async (req: Request, res: Response) => {
     const userId = Number(req.params.id);
     const response = await updateUser(userId, req.body)
-    return sendResponse(res, 200, response)
+    return sendResponse(res, 200, { data: response })
 }
 
 export const deleteUser = async (req: Request, res: Response) => {
     const userId = Number(req.params.id);
     const response = await removeUser(userId)
-    return sendResponse(res, 200, response)
+    return sendResponse(res, 200, { data: response })
 }
