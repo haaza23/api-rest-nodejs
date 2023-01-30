@@ -1,4 +1,4 @@
-import { IUserSignup } from "../interfaces/users.interface";
+import { IUser } from "../interfaces/users.interface";
 import { User } from "../models/users.model";
 
 export const getUsers = async () => {
@@ -21,7 +21,7 @@ export const getUser = async (userId: number) => {
     }
 }
 
-export const createUser = async (user: IUserSignup) => {
+export const createUser = async (user: IUser) => {
     try {
         const newUser = await User.create({...user, first_name: user.firstName, last_name: user.lastName });
         const newUserJSON = JSON.stringify(newUser, null, 2);
@@ -31,7 +31,7 @@ export const createUser = async (user: IUserSignup) => {
     }
 }
 
-export const updateUser = async (userId: number, user: IUserSignup) => {
+export const updateUser = async (userId: number, user: IUser) => {
     try {
         const updatedUser = await User.update(
             {...user, first_name: user.firstName, last_name: user.lastName }, 
